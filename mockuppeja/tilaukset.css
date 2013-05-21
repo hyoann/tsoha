@@ -1,0 +1,17 @@
+header h1 {
+	text-align: center;
+}
+
+header nav ul {
+	list-style-type: none;
+}
+
+header nav ul li {
+	float: right;
+	display: inline;
+}
+
+header nav ul li a {
+	text-decoration: none;
+	padding: 1em 1.5em;
+}
