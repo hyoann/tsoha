@@ -1,5 +1,13 @@
+body {
+	min-width: 900px;
+}
+
 header h1 {
 	text-align: center;
+}
+
+header nav {
+	margin-right: 10%;
 }
 
 header nav ul {
@@ -14,4 +22,17 @@ header nav ul li {
 header nav ul li a {
 	text-decoration: none;
 	padding: 1em 1.5em;
+}
+
+section {
+	margin: 5% 15%;
+}
+
+section div {
+	overflow: auto;
+}
+
+section div img {
+	margin: 0.5em;
+	float: left;
 }

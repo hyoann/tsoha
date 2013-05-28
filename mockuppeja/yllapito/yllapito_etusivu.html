@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"></meta>
+		<link rel="stylesheet" type="text/css" href="yllapito_etusivu_muotoilu.css"/>
+		<title>Etusivu | Yllapito </title>
+	</head>
+	<body>
+		<header>
+			<h1>Ylläpidon sivut</h1>
+		</header>
+			<ul>	
+				<li>
+					<form method="POST" action="" enctype="multipart/form-data">
+						<fieldset>
+							<legend>Lisää tuote</legend>
+							<label>Tuotteen nimi:</label>
+							<input type="text"/><br>
+							<label>Tuotteen hinta:</label>
+							<input type="text"/><br>	
+							<label>Tuotteen kuvaus:</label>
+							<textarea value="kuvaus" rows="5" cols="40"></textarea><br>
+							<label>Tuotteen kuva:</label>
+							<input type="hidden" value="" name="max_koko"/>
+							<input type="file" name="kuva"/><br>
+							<input type="submit" value="Lisää tuote"/>
+						</fieldset>
+					</form>			
+				</li>		
+				<li><a href="#">Muuta tuotetietoja tai poista tuote</a></li>
+				<li>Tilaa tilausraportti lennolle, lennon tunnus: <input type="text"/><input type="button" value="Tilaa"/></li>
+				<li>Tilaa lasku ja toimitusasiakirja asiakkaalle, asiakasID: <input type="text"/><input type="button" value="Tilaa"/></li>
+			</ul>	
+	</body>
+</html>
