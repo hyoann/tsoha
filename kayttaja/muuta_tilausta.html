@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+		<meta charset="utf-8"></meta>
+		<link rel="stylesheet" type="text/css" href="muuta_tilausta_muotoilu.css">
+		<title>Muuta tilausta | SiipiLomatOy</title>
+	</head>
+	<body>
+	
+		<header>
+			<h1>SiipiLomatOy</h1>
+			<nav>
+				<ul>
+					<li><a href="#">Kirjaudu ulos</a></li>
+					<li><a href="#">Selaa tuotteita</a></li>
+					<li><a href="#">Omat tiedot</a></li>
+				</ul>
+			</nav>
+		</header>
+		<section>
+			<h1>Muuta tilausta:</h1>
+			<table border>
+				<tr>
+					<th>Lento</th>
+					<th>Päivämäärä</th>
+					<th>Tilauksesi</th>
+				</tr>
+				<tr>
+					<td>AY633 HEL-STO</td>
+					<td>29.08.2013</td>
+					<td>
+						<ul>
+							<li>Lakupussi, 
+								<select>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2" selected>2</option>
+								</select> 
+								kpl
+							</li>
+							<li>Aurinkolasit, 1 kpl</li>
+							<li>Viinipullo, 2 kpl</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td id="hinta" colspan="3">Yhteishinta: - </td>
+				</tr>
+			</table>
+			<form>
+				<input type="button" value="Hyväksy"/>
+				<input type="button" value="Peru muutokset"/>
+			</form>
+		</section>
+	</body>
+</html>
