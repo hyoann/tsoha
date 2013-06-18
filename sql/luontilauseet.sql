@@ -15,7 +15,8 @@ CREATE TABLE tuote (
 	hinta numeric CHECK (hinta > 0) NOT NULL,
 	kuvaus varchar,
 	kuva varchar,
-	ryhma_id integer REFERENCES tuoteryhma(id)
+	ryhma_id integer REFERENCES tuoteryhma(id),
+	poistettu boolean DEFAULT false;
 );
 
 CREATE TABLE asiakas (

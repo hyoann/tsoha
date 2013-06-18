@@ -88,11 +88,14 @@ article {
 	padding-left: 1em;
 }
 
+img{
+	max-height: 250px;
+	max-width: 250px;
+}
+
 #selaa div img {
 	margin: 0.5em;
 	float: left;
-	max-height: 250px;
-	width: auto;
 }
 
 #selaa div p {
@@ -142,11 +145,6 @@ article {
 	margin-left: 1.5em;
 }
 
-img{
-	max-height: 250px;
-	max-width: 250px;
-}
-
 #lisaa fieldset {
 	width: 50%;
 }
@@ -173,4 +171,9 @@ img{
 #tuotteet td, th {
 	border-style: solid;
 	border-width: 1px;
+}
+
+#tuotteet img {
+    max-height: 100px;
+    width: auto;
 }
