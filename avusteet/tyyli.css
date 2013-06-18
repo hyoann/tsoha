@@ -1,0 +1,176 @@
+header h1 {
+	text-align: center;
+}
+
+body {
+	margin: 0 10%;
+	min-width: 800px;
+	background-color: #DEF7FF;
+}
+
+article {
+	margin: 0 20%;
+}
+
+#kirjautuminen {
+	float: left;
+}
+
+#kayttaja {
+	margin-right: 10%;
+	margin-top: 2em;
+}
+
+#kayttaja ul {
+	list-style-type: none;
+}
+
+#kayttaja ul li {
+	float: right;
+	display: inline;
+}
+
+#kayttaja ul li a {
+	text-decoration: none;
+	padding: 1em 1.5em;
+}
+
+#omat_tiedot {
+	margin-left: 20%;
+	margin-top: 100px;
+}
+
+#omat_tiedot h1 {
+	margin-bottom: 40px;
+}
+
+#omat_tiedot table {
+	border-style: hidden;
+	border-collapse: collapse;
+	margin-left: 10%;
+	margin-right: 2em;
+	float: left;
+}
+
+#omat_tiedot table th {
+	text-align: left;
+	padding: 0em 0.5em;
+
+}
+
+#omat_tiedot table td {
+	vertical-align: text-top;
+	padding: 0em 1em;
+
+}
+
+#omat_tiedot table tr td ul {
+	margin-left: -2em;
+	margin-top: 0.5em;
+	list-style-type: none;
+}
+
+#hinta {
+	text-align: right;
+}
+
+#omat_tiedot input {
+	margin-top: 1.5em;
+}
+
+#selaa {
+	padding-top: 5%;
+}
+
+#selaa div {
+	overflow: auto;
+	margin-left: 15%;
+	padding-left: 1em;
+}
+
+#selaa div img {
+	margin: 0.5em;
+	float: left;
+	max-height: 250px;
+	width: auto;
+}
+
+#selaa div p {
+	margin: 1.5em 1em;
+}
+
+#selaa #tuoteryhmat ul {
+	list-style-type: none;
+	float: left;
+	padding-right: 3em;
+	margin-left: -2em;
+}
+
+#selaa #tuoteryhmat ul li  {
+	padding: 0.5em 0;
+}
+
+#selaa #tuoteryhmat ul li p {
+	margin-bottom: -2em;
+	text-decoration: underline;
+}
+
+#selaa #tuoteryhmat ul li a {
+	text-decoration: none;
+}
+
+#muuta {
+	margin-left: 20%;
+	margin-top: 100px;
+}
+
+#muuta  h1 {
+	margin-bottom: 40px;
+}
+
+#muuta  td {
+    padding: 0 1.5em;
+}
+
+#muuta  #hyvaksy {
+	margin-top: 4em;
+	margin-left: -8em;
+}
+
+#muuta  #hinta {
+	float: left;
+	margin-left: 1.5em;
+}
+
+img{
+	max-height: 250px;
+	max-width: 250px;
+}
+
+#lisaa fieldset {
+	width: 50%;
+}
+
+#lisaa li {
+	padding: 1em;
+}
+
+#muutos {
+	width: 60%;
+}
+
+#kuvaus {
+	margin-left: 3em;
+	color: gray;
+}
+
+#tuotteet {
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+
+#tuotteet td, th {
+	border-style: solid;
+	border-width: 1px;
+}

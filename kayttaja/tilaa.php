@@ -1,8 +1,18 @@
 <?php
-
-	require_once("funktioita.php");
+	require_once("../avusteet.php");
+	
 	if($_POST["maara"] > 0) {
-		lisaaOstokseksi($_POST["maara"], $_POST["asiakas"], $_POST["tuote"]);
+		
+		$ostos = haeOstos($_POST["asiakas"], $_POST["tuote"]);
+		
+		if (is_null($ostos)) {
+			lisaaOstokseksi($_POST["maara"], $_POST["asiakas"], $_POST["tuote"]);		
+		
+		} else { 
+			$uusiMaara = $_POST["maara"] + $ostos->tuotemaara;
+			muutaOstosta($ostos->id, $uusiMaara);
+		}
+		
 		header("Location: omat_tiedot.php");
 	}
 	
