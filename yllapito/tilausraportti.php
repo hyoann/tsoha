@@ -1,16 +1,10 @@
 <?php
 	require_once("../avusteet.php");
 	$matkustajat = haeMatkustajat($_POST['lento']);
+	$otsikko = "Tilausraportti | Yllapito";
+	require_once("../avusteet/yla.php");
 ?>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8"></meta>
-		<link rel="stylesheet" type="text/css" href="yllapito_etusivu_muotoilu.css"/>
-		<title>Tilausraportti | Yllapito </title>
-	</head>
-	<body>
 		<header>
 			<h1>Tilausraportti lennolle <?php echo $_POST['lento']; ?></h1>
 		</header>
@@ -34,7 +28,7 @@
 						echo "<td>";
 						foreach ($ostokset as $ostos) {
 							echo "<ul>";
-								echo "<li>" . haeTuote($ostos['tuote_id'])->nimi  . "{$ostos['tuotemaara']} kpl</li>";
+								echo "<li>" . haeTuote($ostos['tuote_id'])->nimi  . " {$ostos['tuotemaara']} kpl</li>";
 							echo "</ul>";
 						}
 						echo "</td>";

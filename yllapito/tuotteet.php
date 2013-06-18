@@ -17,22 +17,19 @@
 					<th>Kuva</th>
 					<th></th>
 				</tr>
-				<?php foreach($tuotteet as $tuote) { 
-					echo "<tr>";
-					echo "<td><input type=\"checkbox\" name=\"lista[]\" value=\"{$tuote->id}\"></td>";					
-					echo "<td>{$tuote->id}</td>";
-					echo "<td>{$tuote->nimi}</td>";
-					echo "<td>{$tuote->hinta}</td>";
-					$ryhma = haeRyhmanNimi($tuote->ryhma_id);
-					echo "<td>{$ryhma['nimi']}</td>";
-					echo "<td>{$tuote->kuvaus}</td>";
-					echo "<td>";
-					echo haeKuva($tuote->id);
-					echo "</td>";
-					echo "<td><input type=\"submit\" name=\"muuta[{$tuote->id}]\" value=\"Muuta\"></td>";					
-					echo"</tr>";	
-					}
-				?>
+				<?php foreach($tuotteet as $tuote) {;?>
+				<tr>
+					<td><input type="checkbox" name="lista[]" value="<?php echo $tuote->id; ?>"/></td>					
+					<td> <?php echo $tuote->id; ?></td>
+					<td> <?php echo $tuote->nimi; ?></td>
+					<td> <?php echo $tuote->hinta; ?></td>
+					<?php $ryhma = haeRyhmanNimi($tuote->ryhma_id); ?>
+					<td> <?php echo $ryhma["nimi"]; ?></td>
+					<td> <?php echo $tuote->kuvaus; ?> </td>
+					<td> <?php haeKuva($tuote); ?> </td>
+					<td><input type="submit" name= "muuta[ <?php echo $tuote->id; ?>]" value="Muuta"></td>					
+				</tr>	
+				<?php } ?>
 			</table>
 			<input type="submit" name="poista"  value="Poista valitut">
 		</form>

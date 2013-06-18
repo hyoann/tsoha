@@ -13,8 +13,7 @@
 	
 ?>
 		<section id="selaa">
-			<nav id="tuoteryhmat">
-				
+			<nav id="tuoteryhmat">	
 				<ul>
 					<li><p>Tuoteryhmät<p><li>
 					<?php foreach ($tuoteryhmat as $tuoteryhma) {
@@ -24,24 +23,22 @@
 					?>
 				</ul>
 			</nav>
-			<?php
-			foreach ($tuotteet as $tuote) {
-				echo "<div>";
-				echo haeKuva($tuote->id);
-				echo "<p>";
-				echo $tuote->nimi. "<br>";
-				echo $tuote->kuvaus . "<br>";
-				echo "Hinta: {$tuote->hinta} €<br>";
-				echo "<form action=\"tilaa.php\" method=\"POST\">";
-				echo "<input type=\"text\" name=\"maara\" size=\"1\" value=\"0\"> kpl";
-				echo "<input type=\"hidden\" name=\"asiakas\" value=\"{$_SESSION["kayttaja"]}\">";
-				echo "<input type=\"hidden\" name=\"tuote\" value=\"{$tuote->id}\">";
-				echo "<input type=\"submit\" value=\"Tilaa\">";
-				echo "</form>";
-				echo "</p>";
-				echo "</div>";
-				}
-			?>
+			
+			<?php foreach ($tuotteet as $tuote) { ?>
+				<div>
+				<?php haeKuva($tuote); ?>
+			    <p><?php echo $tuote->nimi; ?> <br>
+				<?php echo $tuote->kuvaus; ?> <br>
+				Hinta: <?php echo $tuote->hinta; ?> €<br>
+				    <form action="tilaa.php" method="POST"/>
+				        <input type="text" name="maara" size="1" value="0"/> kpl
+				        <input type="hidden" name="asiakas" value="<?php echo $_SESSION['kayttaja']; ?>"/>
+				        <input type="hidden" name="tuote" value="<?php echo $tuote->id; ?>" />
+				        <input type="submit" value="Tilaa"/>
+				    </form>
+				</p>
+				</div>
+				<?php } ?>
 		</section>
 		
 <?php require_once("../avusteet/ala.php"); ?>

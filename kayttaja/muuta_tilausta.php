@@ -12,26 +12,23 @@
 		<section id="muuta">
 		    <h1>Muuta tilausta lennolle <?php echo $lentotunnus["lento"]; echo " " . $lento["kohde"]; ?></h1>
            <form action="tilauksen_muutos.php" method="POST">
-            <table>  
-			       <?php foreach($ostokset as $ostos) {
-					    echo "<tr>";
-					    echo "<td>" . haeTuote($ostos["tuote_id"])->nimi . "</td>";
-						echo "<td>
-						            <input type=\"hidden\" name=\"asiakas\" value=\"{$_SESSION["kayttaja"]}\"/>
-									<input type=\"hidden\" name=\"ostos[]\" value=\"{$ostos["id"]}\"/>
-									<input type=\"text\" name=\"maara[]\" size=\"1\" value=\"{$ostos["tuotemaara"]}\"/> kpl
-
-								</td>";
-						echo "<td>" . haeTuote($ostos["tuote_id"])->hinta . " € / kpl </td>";
-						echo "<td><input type=\"submit\" name=\"poista[{$ostos["id"]}]\" value=\"Poista\"></td>";
-						echo "</tr>";
-					}
-				?>
-
-               </table>
-               <p id="hinta">Yhteishinta: <?php echo laskeYhteishinta($ostokset); ?> </p>
-               <input id="hyvaksy" type="submit" name="hyvaksy" value="Hyvaksy muutokset"/>
-		   </form>
+               <table> 
+		            <?php foreach($ostokset as $ostos) { ?>
+			        <tr>
+			            <td><?php echo haeTuote($ostos["tuote_id"])->nimi ?></td>
+					    <td>
+				            <input type="hidden" name="asiakas" value="<?php echo $_SESSION['kayttaja']; ?>"/>
+					        <input type="hidden" name="ostos[]" value="<?php echo $ostos['id']; ?>"/>
+					        <input type="text" name="maara[]" size="1" value="<?php echo $ostos['tuotemaara']; ?>"/> kpl
+					    </td>
+					    <td><?php echo haeTuote($ostos["tuote_id"])->hinta ?> € / kpl </td>
+					    <td><input type="submit" name="poista[<?php echo $ostos['id']?>]" value="Poista" /></td>
+				    <?php } ?>
+				    </tr>
+			    </table>
+                <p id="hinta">Yhteishinta: <?php echo laskeYhteishinta($ostokset); ?> </p>
+                <input id="hyvaksy" type="submit" name="hyvaksy" value="Hyvaksy muutokset"/>
+		    </form>
 		</section>
 		
 <?php require_once("../avusteet/ala.php"); ?>

@@ -11,11 +11,11 @@
 					<form method="POST" action="lisaa.php" enctype="multipart/form-data">
 						<fieldset>
 							<legend>Lisää tuote</legend>
-							<label>Tuotteen nimi:</label>
+							<label>Tuotteen nimi*</label>
 							<input type="text" name="nimi"/><br>
-							<label>Tuotteen hinta:</label>
-							<input type="text" name="hinta"/><br>
-							<label>Tuoteryhmä:</label>
+							<label>Tuotteen hinta*</label>
+							<input type="text" name="hinta"/>€<br>
+							<label>Tuoteryhmä*</label>
 							<select name="tuoteryhmat">
 								<option value="" selected="selected"></option>;
 							<?php 
@@ -25,9 +25,9 @@
 								}
 							?>
 							</select><br>
-							<label>Tuotteen kuvaus:</label>
+							<label>Tuotteen kuvaus*</label>
 							<textarea value="kuvaus" rows="5" cols="40" name="kuvaus"></textarea><br>
-							<label>Tuotteen kuva:</label>
+							<label>Tuotteen kuva</label>
 							<input type="hidden" value="" name="max_koko"/>
 							<input type="file" name="kuva"/><br>
 							<input type="submit" value="Lisää tuote"/>

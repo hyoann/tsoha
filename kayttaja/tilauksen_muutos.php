@@ -5,7 +5,7 @@
 		poistaOstos(key($_POST['poista']));
 		header("Location: muuta_tilausta.php");
 	
-	} else {
+	} elseif (isset($_POST['hyvaksy'])) {
 		$maarat = $_POST['maara'];
 		$ostokset = $_POST['ostos'];
 

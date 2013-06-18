@@ -10,7 +10,8 @@
 ?>
 		<section id="omat_tiedot">
 			<h1>Hei <?php echo haeKayttaja($_SESSION["kayttaja"])-> nimi; ?>! Tekemäsi tilaukset:</h1>
-			<p> <?php if (empty($ostokset)) { echo "Et ole lisännyt tilaukseesi vielä yhtään ostosta. Selaa tuotteita lisätäksesi tuotteita tilaukseen."; } ?><p>
+			<?php if (empty($ostokset)) { ?> <p>Et ole tehnyt tilausta. Selaa tuotteita!</p>
+			<?php } else { ?>
 			<table border>
 				<tr>
 					<th>Lento</th>
@@ -18,26 +19,25 @@
 					<th>Tilauksesi</th>
 				</tr>
 				<tr>
-					<?php
-						echo "<td>{$lentotunnus["lento"]} {$lento["kohde"]}</td>";
-						echo "<td>{$lento["lahtopaiva"]}</td>";
-						echo "<td>";
-						echo "<ul>";
-						foreach($ostokset as $ostos) {
-							echo "<li>" . haeTuote($ostos["tuote_id"])->nimi . " " . $ostos["tuotemaara"] . " kpl, " . laskeHinta($ostos["id"]) . " € </li>";
-						}
-						echo "</ul>";
-						echo "</td>";
-					?>
+					<td><?php echo $lentotunnus["lento"] ." " . $lento["kohde"]; ?></td>
+					<td><?php echo $lento["paiva"]; ?></td>
+					<td>
+						<ul>
+						<?php foreach($ostokset as $ostos) { ?>
+						    <li><?php echo haeTuote($ostos["tuote_id"])->nimi . " " . $ostos["tuotemaara"] .  "kpl, " . laskeHinta($ostos["id"]) . " €" ?></li>
+						<?php } ?>
+						</ul>
+				    </td>
 				</tr>
 				<tr>
 					<td id="hinta" colspan="3">Yhteishinta: <?php echo laskeYhteishinta($ostokset); ?> €</td>
 				</tr>
 			</table>
 			<form action="muuta.php" method="POST">
-				<input type="hidden" name="asiakas_id" value="<?php echo $_SESSION["kayttaja"]; ?>"/>
+				<input type="hidden" name="asiakas_id" value="<?php echo $_SESSION['kayttaja']; ?>"/>
 				<input type="submit" name="muuta" value="Muuta tilausta"/>
 				<input type="submit" name="peru" value="Peru tilaus"/>
 			</form>
+			<?php } ?>
 		</section>
 <?php require_once("../avusteet/ala.php"); ?>

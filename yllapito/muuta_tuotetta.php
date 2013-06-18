@@ -30,7 +30,7 @@
 	        <p>Kirjoita uusi kuvaus:</p>
 			<textarea value="kuvaus" rows="5" cols="40" name="kuvaus"></textarea><br>
 			<pl>Tuotteen kuva:</p>
-			<?php haeKuva($_GET['id']); ?>
+			<?php haeKuva($tuote); ?>
 			<br> <label>Valitse uusi kuva:</label>
 			<input type="hidden" value="<?php echo $_GET['id']; ?>" name="id"/>
 			<input type="file" name="kuva"/><br>
