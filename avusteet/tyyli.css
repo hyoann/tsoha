@@ -1,5 +1,7 @@
 header h1 {
 	text-align: center;
+	color: #FF9900;
+	font-size: 3em;
 }
 
 body {
@@ -16,23 +18,30 @@ article {
 	float: left;
 }
 
-#kayttaja {
-	margin-right: 10%;
-	margin-top: 2em;
-}
-
-#kayttaja ul {
+.navigaatio ul {
+    height: 40px;
+    line-height: 30px;
+	background-color: #99CC00;
+    margin: 3em auto 2em auto;
 	list-style-type: none;
 }
 
-#kayttaja ul li {
+.navigaatio ul li {
 	float: right;
 	display: inline;
+	margin-right: 2em; 	
 }
 
-#kayttaja ul li a {
+.navigaatio ul li a {
 	text-decoration: none;
-	padding: 1em 1.5em;
+	padding: 5px 0.5em;
+    display: inline-block;
+	color: #DEF7FF;
+}
+
+.navigaatio ul li a:hover {
+    background-color: #DEF7FF;
+    color: #99CC00;
 }
 
 #omat_tiedot {
@@ -45,9 +54,9 @@ article {
 }
 
 #omat_tiedot table {
-	border-style: hidden;
+	border-style: solid;
 	border-collapse: collapse;
-	margin-left: 10%;
+	border-style: hidden;
 	margin-right: 2em;
 	float: left;
 }
@@ -55,7 +64,6 @@ article {
 #omat_tiedot table th {
 	text-align: left;
 	padding: 0em 0.5em;
-
 }
 
 #omat_tiedot table td {
@@ -82,7 +90,7 @@ article {
 	padding-top: 5%;
 }
 
-#selaa div {
+#selaa #tuote {
 	overflow: auto;
 	margin-left: 15%;
 	padding-left: 1em;
@@ -93,32 +101,43 @@ img{
 	max-width: 250px;
 }
 
-#selaa div img {
+#selaa #kuva {
 	margin: 0.5em;
 	float: left;
+	width: 250px;
+	min-height: 150px;
+}
+
+#selaa #tuote #kuva img {
+	display: block;
+    margin: auto;
+}
+
+#selaa #tuote #tuotetiedot {
+	margin-top: 1em;
 }
 
 #selaa div p {
-	margin: 1.5em 1em;
+	margin: -0.5em 0;
+	padding-top: 0.5em;
 }
 
-#selaa #tuoteryhmat ul {
+#selaa #ryhmavalikko  ul {
 	list-style-type: none;
 	float: left;
 	padding-right: 3em;
 	margin-left: -2em;
 }
 
-#selaa #tuoteryhmat ul li  {
+#selaa #ryhmavalikko  ul li  {
 	padding: 0.5em 0;
 }
 
-#selaa #tuoteryhmat ul li p {
-	margin-bottom: -2em;
-	text-decoration: underline;
+#selaa #ryhmavalikko ul  li p {
+	margin-bottom: -0.1em;
 }
 
-#selaa #tuoteryhmat ul li a {
+#selaa #ryhmavalikko  ul li a {
 	text-decoration: none;
 }
 
@@ -163,17 +182,78 @@ img{
 }
 
 #tuotteet {
-	border-style: solid;
+	border-style: none;
 	border-width: 1px;
 	border-collapse: collapse;
 }
 
-#tuotteet td, th {
-	border-style: solid;
+#tuotteet td {
+	border-right-style: solid;
 	border-width: 1px;
+	padding: 1em;
+	border-color: #C2E066;
 }
+
+#tuotteet th {
+    background-color: #C2E066;
+}
+
+#tuotteet #oikealaita {
+    border-right-style: none;
+}
+
 
 #tuotteet img {
     max-height: 100px;
     width: auto;
+}
+
+#tuotteet tr:nth-child(even) {
+    background: white;
+}
+
+#tuotteet tr:nth-child(odd) {
+    background: #F0FFC2;
+}
+
+.keskita {
+	text-align: center;
+}
+
+.tilaaymparille {
+	margin: 1.5em 0;
+	padding: 0.5em;
+}
+.inline {
+	display: inline;
+}
+
+.pienifontti {
+    font-size: 0.9em;
+    color: gray;
+}
+
+#lasku {
+	list-style-type: none;
+}
+
+#lasku  li{
+	margin: 1em 0;
+}
+
+footer {
+	text-align: right;
+	position: fixed;
+	bottom: 0;
+	right: 1em;
+	font-size: 0.7em;
+	color: gray;
+}
+
+#lennot {
+	margin-top: 2em;
+}
+
+#lennot li {
+	margin: -2em 0;
 }

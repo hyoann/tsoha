@@ -1,6 +1,7 @@
 <?php
     require_once("../avusteet.php");
 
+	// Jos kuvaus-kenttään ei kirjoiteta uutta kuvausta, tuotteen vanha kuvaus säilyy
 	if (!empty($_POST["kuvaus"])) {
 		$kuvaus = $_POST["kuvaus"];
 	} else {
@@ -8,6 +9,7 @@
 	}	
     	
 	muutaTuotetietoja($_POST['id'], $_POST["nimi"], $_POST["hinta"], $kuvaus, $_POST["tuoteryhmat"]);
+	
 	if (!empty($_FILES['kuva']['name'])) {
 		lisaaKuva($_POST['id'], $_FILES["kuva"]["tmp_name"]);
 	}

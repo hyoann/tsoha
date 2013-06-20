@@ -7,4 +7,12 @@
 		die();
 		}
 	}
+		
+	function onkoYllapito() {
+		if(!isset($_SESSION["yllapito"])) {
+		header("Location: yllapito/kirjautumissivu.php");
+		die();
+		}
+	}	
+	
 ?>

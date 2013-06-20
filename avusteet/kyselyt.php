@@ -3,53 +3,49 @@
 	
 	function tunnistaKayttaja($tunnus, $salasana) {
 		$kysely = muodostaYhteys()->prepare('SELECT id FROM asiakas WHERE kayttajatunnus = ? AND salasana = ?');
-	   
-		if ($kysely->execute(array($tunnus, $salasana))) {
+	    if ($kysely->execute(array($tunnus, $salasana))) {
 			return $kysely->fetchObject();
-		} else {
-			return null;
-		}
-	}
-	
-	function haeKayttaja($asiakas_id) {
-		$kysely = muodostaYhteys()->prepare('SELECT nimi, osoite, puhelin FROM asiakas WHERE id = ?');
-		$kysely->execute(array($asiakas_id));
-		$asiakas = $kysely->fetchObject();
-		return $asiakas;
-	}
-	
-	function haeTuoteryhmat() {
-	$kysely = muodostaYhteys()->prepare("SELECT * FROM tuoteryhma");
-	if($kysely->execute()) {
-
-	$rivit = array();
-		while($rivi = $kysely->fetchObject()) {
-			$rivit[] = $rivi;
-		}
-		return $rivit;
-	}
-	return null;
-}	
-
-	function haeRyhmanNimi($id) {
-		$kysely = muodostaYhteys()->prepare("SELECT nimi FROM tuoteryhma WHERE id = ?");
-		if($kysely->execute(array($id))) {
-			$nimi = $kysely->fetch();
-			return $nimi;
 		}
 		return null;
 	}
 
+	
+	function haeKayttaja($asiakas_id) {
+		$kysely = muodostaYhteys()->prepare('SELECT nimi, osoite, puhelin FROM asiakas WHERE id = ?');
+		if($kysely->execute(array($asiakas_id))) {
+			$asiakas = $kysely->fetchObject();
+			return $asiakas;
+		}
+		return null;
+	}
+	
+	function haeTuoteryhmat() {
+		$kysely = muodostaYhteys()->prepare('SELECT * FROM tuoteryhma');
+		if($kysely->execute()) {
+			$rivit = array();
+			while($rivi = $kysely->fetchObject()) {
+				$rivit[] = $rivi;
+			}
+			return $rivit;
+		}
+		return null;
+	}	
+
 	function lisaaTuote($nimi, $hinta, $kuvaus, $ryhmaid) {
-		$yhteys = muodostaYhteys();
-		$kysely = $yhteys->prepare("INSERT INTO tuote (nimi, hinta, kuvaus, ryhma_id) VALUES (?, ?, ?, ?)");
-		$kysely->execute(array($nimi, $hinta, $kuvaus, $ryhmaid));
-		
-		return $yhteys->lastInsertId("tuote_id_seq");
+		$yhteys = muodostaYhteys();		
+		$kysely = $yhteys->prepare('INSERT INTO tuote (nimi, hinta, kuvaus, ryhma_id) VALUES (?, ?, ?, ?)');
+		if ($kysely->execute(array($nimi, $hinta, $kuvaus, $ryhmaid))) {
+			return $yhteys->lastInsertId("tuote_id_seq");
+		}	
+		return null;
 	}
 
 	function haeTuotteet() {
-		$kysely = muodostaYhteys()->prepare("SELECT id, nimi, hinta, kuvaus, ryhma_id, kuva IS NOT NULL AS onkoKuvaa  FROM tuote WHERE poistettu = ? ORDER BY id");
+		$kysely = muodostaYhteys()->prepare('SELECT tuote.id, tuote.nimi, hinta, kuvaus, tuoteryhma.nimi AS ryhma, kuva IS NOT NULL AS onkoKuvaa 
+		FROM tuote 
+		JOIN tuoteryhma ON tuote.ryhma_id = tuoteryhma.id
+		WHERE poistettu = ?
+		ORDER BY id DESC');
 		if($kysely->execute(array('false'))) {
 			$rivit = array();
 			while($rivi = $kysely->fetchObject()) {
@@ -74,14 +70,20 @@
 
 
 	function poistaTuote($id) {
-		$kysely = muodostaYhteys()->prepare("UPDATE tuote SET poistettu = ? WHERE id = ?");
-		$kysely->execute(array('true', $id));
+		$kysely = muodostaYhteys()->prepare('UPDATE tuote SET poistettu = ? WHERE id = ?');
+		if ($kysely->execute(array('true', $id))) {
+			return $id;
+		}
+		return null;
 	}
 
 	function lisaaKuva($id, $tiedosto) { 
 		$kuva = file_get_contents($tiedosto);
-		$kysely = muodostaYhteys()->prepare("UPDATE tuote SET kuva = ? WHERE id = ?");
-		$kysely->execute(array(base64_encode($kuva), $id));
+		$kysely = muodostaYhteys()->prepare('UPDATE tuote SET kuva = ? WHERE id = ?');
+		if ($kysely->execute(array(base64_encode($kuva), $id))) {
+			return $id;
+		}
+		return null;
 	}
 
 	function haeKuva($tuote) {
@@ -93,19 +95,28 @@
 
 	function haeTuote($id) {
 		$kysely = muodostaYhteys()->prepare('SELECT id, nimi, hinta, kuvaus, ryhma_id, kuva IS NOT NULL AS onkoKuvaa FROM tuote WHERE id = ?');
-		$kysely->execute(array($id));
-		$tuote = $kysely->fetchObject();
-		return $tuote;
+		if ($kysely->execute(array($id))) {
+			$tuote = $kysely->fetchObject();
+			return $tuote;
+		}
+		return null;
 	}		
 
 	function muutaTuotetietoja($id, $nimi, $hinta, $kuvaus, $ryhma_id) {
 		$kysely = muodostaYhteys()->prepare('UPDATE tuote SET (nimi, hinta, kuvaus, ryhma_id) = (?, ?, ?, ?) WHERE id = ?');
-		$kysely->execute(array($nimi, $hinta, $kuvaus, $ryhma_id, $id));
+		if ($kysely->execute(array($nimi, $hinta, $kuvaus, $ryhma_id, $id))) {
+			return $id;
+		}
+		return null;
 	}
 	
 	function lisaaOstokseksi($tuotemaara, $asiakas_id, $tuote_id) {
-		$kysely = muodostaYhteys()->prepare('INSERT INTO ostos (tuotemaara, asiakas_id, tuote_id) VALUES (?, ?, ?)');
-		$kysely->execute(array($tuotemaara, $asiakas_id, $tuote_id));
+		$yhteys = muodostaYhteys();	
+		$kysely = $yhteys->prepare('INSERT INTO ostos (tuotemaara, asiakas_id, tuote_id) VALUES (?, ?, ?)');
+		if ($kysely->execute(array($tuotemaara, $asiakas_id, $tuote_id))) {
+			return $yhteys->lastInsertId("ostos_id_seq");
+		}	
+		return null;
 	}
 	
 	function haeOstos($asiakas_id, $tuote_id) {
@@ -114,19 +125,24 @@
 		$ostos = $kysely->fetchObject();
 		if (!$ostos) {
 			return null;
-		} else {
-			return $ostos;
-		}
+		} 
+		return $ostos;
 	}
 
 	function muutaOstosta($ostos, $maara) {
 		$kysely = muodostaYhteys()->prepare('UPDATE ostos SET tuotemaara = ? WHERE id = ?');
-		$kysely->execute(array($maara, $ostos));
+		if ($kysely->execute(array($maara, $ostos))) {
+			return $ostos;
+		}
+		return null;
 	}
 
 	function poistaOstos($poistettava) {
 		$kysely = muodostaYhteys()->prepare('DELETE FROM ostos WHERE id = ?');
-		$kysely->execute(array($poistettava));
+		if( $kysely->execute(array($poistettava))) {
+			return $poistettava;
+		}
+		return null;
 	}
 
 	function haeOstokset($asiakas) {
@@ -140,45 +156,74 @@
 	
 	function poistaTilaus($id) {
 		$kysely = muodostaYhteys()->prepare('DELETE FROM ostos WHERE asiakas_id = ?');
-		$kysely->execute(array($id));
+		if ($kysely->execute(array($id))) {
+			return $id;
+		}
+		return null;
 	}
 	
-	function laskeHinta($ostos_id) {
-		$kysely = muodostaYhteys()->prepare('SELECT tuotemaara, tuote_id FROM ostos WHERE id = ?');
-		$kysely->execute(array($ostos_id));
-		$ostos = $kysely->fetchObject();
-		
-		return haeTuote($ostos->tuote_id)->hinta * $ostos->tuotemaara;
-	}
-
-	function laskeYhteishinta($ostokset) {
-		$yhteishinta = 0;
-		foreach ($ostokset as $ostos) {
-			$yhteishinta += laskeHinta($ostos["id"]);
-		  }
-		 return $yhteishinta;
+	function ostostenHinnat($asiakas) {
+		$kysely = muodostaYhteys()->prepare('SELECT ostos.id, tuote.nimi, ostos.tuotemaara, tuote.hinta AS yksikkohinta, (ostos.tuotemaara*tuote.hinta) AS hinta
+		FROM ostos 
+		JOIN tuote ON ostos.tuote_id = tuote.id
+		WHERE ostos.asiakas_id = ?');
+		if($kysely->execute(array($asiakas))) {
+			$ostokset = $kysely->fetchAll();		
+			return $ostokset;
+		}
+		return null;
 	}
 	
 	function haeLento($asiakas) {
-		$kysely = muodostaYhteys()->prepare('SELECT lento FROM asiakas WHERE id = ?');
-		$kysely->execute(array($asiakas));
-		$lento = $kysely->fetch();
-		return $lento;
-	}
-
-	function haeLennonTiedot($tunnus) {
-		$kysely = muodostaYhteys()->prepare('SELECT kohde, to_char(lahtopaiva, \'DD.MM.YYYY\') AS paiva FROM lento WHERE tunnus = ?');
-		if($kysely->execute(array($tunnus))) {
-			$rivit = $kysely->fetch();
-			return $rivit;
+		$kysely = muodostaYhteys()->prepare('SELECT lento.tunnus, lento.kohde, to_char(lento.lahtopaiva, \'DD.MM.YYYY\') AS paiva 
+		FROM lento, asiakas
+		WHERE lento.tunnus = asiakas.lento
+		AND asiakas.id = ?');
+		if($kysely->execute(array($asiakas))) {
+			$lento = $kysely->fetch();
+			return $lento;
 			}
 		return null;
 	}
 	
-	function haeMatkustajat($lento) {
-		$kysely = muodostaYhteys()->prepare('SELECT id, nimi, istumapaikka FROM asiakas WHERE lento = ? ORDER BY istumapaikka');
-		$kysely->execute(array($lento));
-		$matkustajat = $kysely->fetchAll();
-		return $matkustajat;
+	function haeMatkustajatJaOstokset($lento) {
+		$kysely = muodostaYhteys()->prepare('SELECT asiakas.id, asiakas.nimi, asiakas.istumapaikka, ostos.tuote_id, tuote.nimi AS tuotenimi, ostos.tuotemaara 
+		FROM ostos
+		JOIN tuote ON ostos.tuote_id = tuote.id
+		JOIN asiakas ON ostos.asiakas_id = asiakas.id
+		WHERE asiakas.id IN
+		(SELECT id FROM asiakas WHERE lento = ?)
+		ORDER BY asiakas.istumapaikka');
+		if ($kysely->execute(array($lento))) {
+			$matkustajat = $kysely->fetchAll();
+			return $matkustajat;
+		}
+		return null;
+	}
+	
+	function tuotteidenMaara($lento) {
+	    $kysely = muodostaYhteys()->prepare('SELECT tuote.nimi, SUM(ostos.tuotemaara) AS maara 
+	    FROM ostos
+	    JOIN tuote ON ostos.tuote_id = tuote.id
+	    WHERE ostos.asiakas_id IN 
+	    (SELECT id FROM asiakas WHERE lento = ?) 
+	    GROUP BY tuote.nimi');
+	    if ($kysely->execute(array($lento))) {
+			$tuotteet = $kysely->fetchAll();
+			return $tuotteet;
+		}
+		return null;
+	}
+	
+	function haeLennot() {
+		$kysely = muodostaYhteys()->prepare('SELECT DISTINCT lento 
+		FROM asiakas 
+		WHERE asiakas.id IN 
+		(SELECT asiakas_id FROM ostos)');
+		if ($kysely->execute()) {
+			$lennot = $kysely->fetchAll();
+			return $lennot;
+		}
+		return null;
 	}
 ?>
