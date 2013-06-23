@@ -25,7 +25,7 @@
 			<select name="tuoteryhmat">";
 			<?php foreach ($tuoteryhmat as $tuoteryhma) {
 					if($tuoteryhma->id == $tuote->ryhma_id) {
-						//tuotteen tuoteryhmä valitaan
+						//muokattavaan tuotteen tuoteryhmä merkitään valituksi
 						 $selected = "selected";
 						 } else {
 						     $selected = "";

@@ -13,6 +13,15 @@
 		header("Location: yllapito/kirjautumissivu.php");
 		die();
 		}
-	}	
+	}
 	
+	function on_kokonaisluku($arvo) {
+		$arvo = filter_var($arvo, FILTER_VALIDATE_INT);
+		return ($arvo !== FALSE);
+	}
+	
+	function on_desimaali($arvo) {
+		$arvo = filter_var($arvo, FILTER_VALIDATE_FLOAT);
+		return ($arvo !== FALSE);
+	}
 ?>

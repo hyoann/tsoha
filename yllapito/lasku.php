@@ -13,13 +13,13 @@
 		$asiakas = haeKayttaja($_POST['id']);
 		
 		if (empty($asiakas)) { 
-			die ("<p>Asiakasta ei löydy!</p>");
+			die ("Asiakasta ei löydy!");
         } 
 	   
 	   $ostokset = ostostenHinnat($_POST['id']);
 	   
 	   if(empty($ostokset)) {
-			die("<p>Asiakkaalla ei ole ostoksia!</p>");
+			die("Asiakkaalla ei ole ostoksia!");
 		}
     } 
 	

@@ -1,11 +1,11 @@
 <?php
 	require_once("../avusteet.php");
 	
-	if($_POST["maara"] > 0) {
+	if(on_kokonaisluku($_POST["maara"]) && $_POST["maara"] > 0) {
 		
 		$ostos = haeOstos($_POST["asiakas"], $_POST["tuote"]);
 		
-		//tuotetta ei ole vielä tilattu
+		//jos tuotetta ei ole vielä tilattu, lisätään ostos-tauluun uusi rivi
 		if (is_null($ostos)) {
 			lisaaOstokseksi($_POST["maara"], $_POST["asiakas"], $_POST["tuote"]);	
 			

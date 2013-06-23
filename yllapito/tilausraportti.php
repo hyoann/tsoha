@@ -49,6 +49,7 @@
 
 	<ul>
 	<?php
+		//haetaan tieto tuotteista ja niiden määristä valitulle lennolle
 		$tuotteet = tuotteidenMaara($_POST['lento']);
 		foreach ($tuotteet as $tuote) {?>
 		<li><?php echo htmlspecialchars($tuote['nimi']) . ", " . htmlspecialchars($tuote['maara']) . " kpl"; ?></li>

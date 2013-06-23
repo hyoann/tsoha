@@ -16,7 +16,7 @@ CREATE TABLE tuote (
 	kuvaus varchar,
 	kuva varchar,
 	ryhma_id integer REFERENCES tuoteryhma(id),
-	poistettu boolean DEFAULT false;
+	poistettu boolean DEFAULT FALSE
 );
 
 CREATE TABLE asiakas (
@@ -32,7 +32,7 @@ CREATE TABLE asiakas (
 
 CREATE TABLE ostos (
 	id serial PRIMARY KEY,
-	tuotemaara integer CHECK (tuotemaara >= 0),
+	tuotemaara integer CHECK (tuotemaara > 0),
 	asiakas_id integer REFERENCES asiakas(id) ON DELETE CASCADE,
 	tuote_id integer REFERENCES tuote(id)
 );

@@ -6,6 +6,7 @@
 	$otsikko = "Muuta tilausta | SiipiLomatOy";	
 	require_once("../avusteet/yla.php");
 	
+	//haetaan käyttäjän ostokset hintoineen
 	$ostokset = ostostenHinnat($_SESSION["kayttaja"]);
 	
 	if (empty($ostokset)) {

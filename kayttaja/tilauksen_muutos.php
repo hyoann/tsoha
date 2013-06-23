@@ -11,7 +11,7 @@
 
 		//tuote ja sitä vastaava tuotemäärä sijaitsevat taulukoiden samassa indeksissä
 		for ($i = 0; $i < count($ostokset); $i++) {
-			if(!is_numeric($maarat[$i]) || $maarat[$i] < 0) {
+			if(!on_kokonaisluku($maarat[$i]) || $maarat[$i] < 0) {
 				break;
 			} elseif ($maarat[$i] > 0) {
 				 muutaOstosta($ostokset[$i], $maarat[$i]);    

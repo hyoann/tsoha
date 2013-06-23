@@ -43,7 +43,7 @@
 				<td> <?php echo $tuote->ryhma; ?></td>
 				<td> <?php echo htmlspecialchars($tuote->kuvaus); ?> </td>
 				<td> <?php haeKuva($tuote); ?> </td>
-				<td id="oikealaita"><input type="submit" name= "muuta[ <?php echo $tuote->id; ?>]" value="Muokkaa"></td>					
+				<td id="oikealaita"><input type="submit" name="muuta[ <?php echo $tuote->id; ?>]" value="Muokkaa"></td>					
 			</tr>	
 			<?php } ?>
 			

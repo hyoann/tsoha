@@ -6,7 +6,9 @@
 	$otsikko = "Omat tiedot | SiipiLomatOy";
 	require_once("../avusteet/yla.php");
 	
+	//haetaan käyttäjän tilaamat ostokset hintoineen
 	$ostokset = ostostenHinnat($_SESSION["kayttaja"]);
+	//haetaan lento, jolla käyttäjä on
     $lento = haeLento($_SESSION["kayttaja"]);
 	
 ?>
